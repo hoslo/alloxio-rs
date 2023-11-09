@@ -11,6 +11,7 @@ pub struct Mode {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all="SCREAMING_SNAKE_CASE")]
 pub enum Bits {
     None,
     Execute,
@@ -20,21 +21,6 @@ pub enum Bits {
     ReadExecute,
     ReadWrite,
     All,
-}
-
-impl Bits {
-    fn to_str(&self) -> &'static str {
-        match self {
-            Bits::None => "NONE",
-            Bits::Execute => "EXECUTE",
-            Bits::Write => "WRITE",
-            Bits::WriteExecute => "WRITE_EXECUTE",
-            Bits::Read => "READ",
-            Bits::ReadExecute => "READ_EXECUTE",
-            Bits::ReadWrite => "READ_WRITE",
-            Bits::All => "ALL",
-        }
-    }
 }
 
 /// BlockInfo represents a block's information.
@@ -143,6 +129,7 @@ pub type FileInfos = Vec<FileInfo>;
 
 /// LoadMetadataType represents the load metadata type.
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all="SCREAMING_SNAKE_CASE")]
 pub enum LoadMetadataType {
     /// LoadMetadataTypeNever means metadata should never be loaded.
     Never,
@@ -152,18 +139,9 @@ pub enum LoadMetadataType {
     Always,
 }
 
-impl LoadMetadataType {
-    fn as_str(&self) -> &str {
-        match self {
-            LoadMetadataType::Never => "Never",
-            LoadMetadataType::Once => "Once",
-            LoadMetadataType::Always => "Always",
-        }
-    }
-}
-
 /// ReadType represents a read type.
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all="SCREAMING_SNAKE_CASE")]
 pub enum ReadType {
     /// ReadTypeNoCache means data will be not cached.
     NoCache,
@@ -173,18 +151,10 @@ pub enum ReadType {
     CachePromote,
 }
 
-impl ReadType {
-    fn as_str(&self) -> &str {
-        match self {
-            ReadType::NoCache => "NO_CACHE",
-            ReadType::Cache => "CACHE",
-            ReadType::CachePromote => "CACHE_PROMOTE",
-        }
-    }
-}
 
 /// TTLAction represents a TTL action.
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all="SCREAMING_SNAKE_CASE")]
 pub enum TTLAction {
     /// TTLActionDelete represents the action of deleting a path.
     Delete,
@@ -192,17 +162,10 @@ pub enum TTLAction {
     Free,
 }
 
-impl TTLAction {
-    fn as_str(&self) -> &str {
-        match self {
-            TTLAction::Delete => "DELETE",
-            TTLAction::Free => "CACFREEHE",
-        }
-    }
-}
 
 /// WriteType represents a write type.
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all="SCREAMING_SNAKE_CASE")]
 pub enum WriteType {
     /// WriteTypeMustCache means the data will be stored in Alluxio.
     MustCache,

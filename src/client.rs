@@ -47,7 +47,7 @@ impl Client {
         Ok(Client {
             host,
             port,
-            prefix: format!("{}", API_PREFIX),
+            prefix: API_PREFIX.to_string(),
             client,
         })
     }
@@ -74,7 +74,6 @@ impl Client {
         params: HashMap<&str, &str>,
         input: I,
     ) -> Result<O> {
-        println!("{}", serde_json::to_string(&input)?);
         let resp = self
             .client
             .post(self.endpoint_url(resource.as_str(), params.clone()))
@@ -84,7 +83,7 @@ impl Client {
         let status = resp.status();
         if status.is_success() {
             let body = resp.bytes().await?;
-            if body.len() == 0 {
+            if body.is_empty() {
                 return Ok(O::default());
             }
             return Ok(serde_json::from_slice(body.as_ref())?);
@@ -99,7 +98,7 @@ impl Client {
         I: AsyncRead + Send + Sync + 'a + 'static,
     {
         let stream = FramedRead::new(input, BytesCodec::new());
-        let suffix = vec![STREAMS_PREFIX, &id.to_string(), WRITE].join("/");
+        let suffix = [STREAMS_PREFIX, &id.to_string(), WRITE].join("/");
         let output = self
             .client
             .post(self.endpoint_url(&suffix, HashMap::new()))
@@ -112,12 +111,12 @@ impl Client {
     }
 
     pub async fn close(&self, id: i64) -> Result<()> {
-        let _ = self.post(vec![STREAMS_PREFIX, &id.to_string(), CLOSE].join("/"), HashMap::new(), serde_json::Value::Null).await?;
+        self.post([STREAMS_PREFIX, &id.to_string(), CLOSE].join("/"), HashMap::new(), serde_json::Value::Null).await?;
         Ok(())
     }
 
     pub async fn read(&self, id: i64) -> Result<impl AsyncRead> {
-        let suffix = vec![STREAMS_PREFIX, &id.to_string(), READ].join("/");
+        let suffix = [STREAMS_PREFIX, &id.to_string(), READ].join("/");
 
         let resp = self
             .client
