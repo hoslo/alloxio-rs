@@ -2,6 +2,9 @@
 name = "alluxio-rs"
 version = "0.1.0"
 edition = "2021"
+description = "rust alluxio rest api client"
+license = "MIT License"
+repository = { value = "https://github.com/hoslo/alluxio-rs", readme = "README.md" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
