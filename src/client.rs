@@ -133,5 +133,5 @@ impl Client {
 }
 
 fn convert_error(err: reqwest::Error) -> std::io::Error {
-    Error::new(ErrorKind::Other, "reqwest error")
+    Error::new(ErrorKind::Other, format!("reqwest error: {}", err))
 }
