@@ -1,6 +1,7 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Mode {
     /// OwnerBits represents the owner access mode
     pub owner_bits: Bits,
@@ -25,7 +26,7 @@ pub enum Bits {
 
 /// BlockInfo represents a block's information.
 #[derive(Debug, Serialize, Deserialize)]
-
+#[serde(rename_all = "camelCase")]
 pub struct BlockInfo {
     /// BlockID is the block id.
     pub block_id: i64,
@@ -37,7 +38,7 @@ pub struct BlockInfo {
 
 /// BlockLocation represents a block's location.
 #[derive(Debug, Serialize, Deserialize)]
-
+#[serde(rename_all = "camelCase")]
 pub struct BlockLocation {
     /// WorkerID is the worker id.
     pub worker_id: i64,
@@ -49,7 +50,7 @@ pub struct BlockLocation {
 
 /// WorkerNetAddress represents a worker's net address.
 #[derive(Debug, Serialize, Deserialize)]
-
+#[serde(rename_all = "camelCase")]
 pub struct WorkerNetAddress {
     /// Host is the hostname.
     pub host: String,
@@ -63,7 +64,7 @@ pub struct WorkerNetAddress {
 
 /// FileBlockInfo represents a file block's information.
 #[derive(Debug, Serialize, Deserialize)]
-
+#[serde(rename_all = "camelCase")]
 pub struct FileBlockInfo {
     /// BlockInfo is the block information
     pub block_info: BlockInfo,
@@ -75,7 +76,7 @@ pub struct FileBlockInfo {
 
 /// FileInfo represents a file's information.
 #[derive(Debug, Serialize, Deserialize, Default)]
-
+#[serde(rename_all = "camelCase")]
 pub struct FileInfo {
     /// BlockIds holds the block ids.
     pub block_ids: Vec<i64>,
